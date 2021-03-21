@@ -58,7 +58,7 @@ public class EmpresaController {
 	@PostMapping("/empresas")
 	public ResponseEntity<?> guardarEstudiante(@RequestBody EmpresaDto empresaDto){
 		
-		if(!this.usuarioService.ExisteUsuarioSegunCorreo(empresaDto.getCorreo())) {
+		if(this.usuarioService.ExisteUsuarioSegunCorreo(empresaDto.getCorreo())) {
 			return new ResponseEntity<>(new Mensaje("Nombre de correo repetido"), HttpStatus.BAD_REQUEST);
 		}
 		
