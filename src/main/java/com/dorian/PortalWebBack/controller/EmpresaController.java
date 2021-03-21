@@ -56,7 +56,7 @@ public class EmpresaController {
 		return new ResponseEntity<>(laEmpresa.get(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/empresaInfo")
+	@PostMapping("/empresaInfo")
 	public ResponseEntity<?> getEmpresaSegunUsuario(@RequestBody UsuarioDto usuariodto){
 		
 		if(usuariodto == null) {

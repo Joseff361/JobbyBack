@@ -55,7 +55,7 @@ public class EstudianteController {
 		return new ResponseEntity<>(elEstudiante.get(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/estudianteInfo")
+	@PostMapping("/estudianteInfo")
 	public ResponseEntity<?> getEmpresaSegunUsuario(@RequestBody UsuarioDto usuariodto){
 		
 		if(this.usuarioService.getUsuario(usuariodto.getId()).isEmpty() || usuariodto == null) {
