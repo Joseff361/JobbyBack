@@ -12,18 +12,18 @@ public class LoginDto {
 	}
 
 	public String getCorreo() {
-		return Correo;
+		return this.Correo;
 	}
 
 	public void setCorreo(String correo) {
-		Correo = correo;
+		this.Correo = correo;
 	}
 
 	public String getContrasenia() {
-		return Contrasenia;
+		return this.Contrasenia;
 	}
 
 	public void setContrasenia(String contrasenia) {
-		Contrasenia = contrasenia;
+		this.Contrasenia = contrasenia;
 	}
 }

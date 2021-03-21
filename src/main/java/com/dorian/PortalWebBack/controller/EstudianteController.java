@@ -59,10 +59,11 @@ public class EstudianteController {
 		
 		if(this.usuarioService.ExisteUsuarioSegunCorreo(estudianteDto.getCorreo())) {
 			
-			return new ResponseEntity<>("Nombre de correo repetido", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new Mensaje("Nombre de correo repetido"), HttpStatus.BAD_REQUEST);
 		}
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		System.out.println(estudianteDto);
 		
 		// GUARDADO EN AMBAS TABLAS
 		Usuario elUsuario = new Usuario(estudianteDto.getCorreo(), passwordEncoder.encode(estudianteDto.getContrasenia()));
@@ -73,7 +74,7 @@ public class EstudianteController {
 			
 		this.estudiantesService.guardarEstudiante(elEstudiante);
 		
-		return new ResponseEntity<>("Estudiante guardado en la BBDD", HttpStatus.OK);
+		return new ResponseEntity<>(new Mensaje("Estudiante guardado en la BBDD"), HttpStatus.OK);
 	}
 	
 	

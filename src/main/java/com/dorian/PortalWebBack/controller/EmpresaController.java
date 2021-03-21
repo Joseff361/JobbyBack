@@ -58,9 +58,8 @@ public class EmpresaController {
 	@PostMapping("/empresas")
 	public ResponseEntity<?> guardarEstudiante(@RequestBody EmpresaDto empresaDto){
 		
-		if(this.usuarioService.ExisteUsuarioSegunCorreo(empresaDto.getCorreo())) {
-			
-			return new ResponseEntity<>("Nombre de correo repetido", HttpStatus.BAD_REQUEST);
+		if(!this.usuarioService.ExisteUsuarioSegunCorreo(empresaDto.getCorreo())) {
+			return new ResponseEntity<>(new Mensaje("Nombre de correo repetido"), HttpStatus.BAD_REQUEST);
 		}
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -78,7 +77,7 @@ public class EmpresaController {
 			
 		this.empresaService.guardarEmpresa(laEmpresa);
 		
-		return new ResponseEntity<>("Empresa guardada en la BBDD", HttpStatus.OK);
+		return new ResponseEntity<>(new Mensaje("Empresa guardada en la BBDD"), HttpStatus.OK);
 	}
 	
 }

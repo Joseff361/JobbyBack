@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @RequestMapping("/api")
 public class UsuarioController {
 

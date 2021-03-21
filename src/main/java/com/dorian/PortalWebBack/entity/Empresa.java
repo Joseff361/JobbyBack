@@ -28,14 +28,14 @@ public class Empresa {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
     public Usuario usuario;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_oferta_empresa", referencedColumnName = "id")
-    public OfertaEmpresa ofertaEmpresa;
-    
+        
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_pago_empresa", referencedColumnName = "id")
     public PagoEmpresa pagoEmpresa;
+    
+    public Empresa() {
+    	
+    }
 
 	public Empresa(String nombreDeEmpresa, String locacion, long rUC, String sitioWeb, String descripcion) {
 		this.nombreDeEmpresa = nombreDeEmpresa;
@@ -99,14 +99,6 @@ public class Empresa {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public OfertaEmpresa getOfertaEmpresa() {
-		return ofertaEmpresa;
-	}
-
-	public void setOfertaEmpresa(OfertaEmpresa ofertaEmpresa) {
-		this.ofertaEmpresa = ofertaEmpresa;
 	}
 
 	public PagoEmpresa getPagoEmpresa() {

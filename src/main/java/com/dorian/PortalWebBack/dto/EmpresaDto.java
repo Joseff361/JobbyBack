@@ -4,68 +4,68 @@ public class EmpresaDto {
 
 	public String NombreDeEmpresa;
 	
-    public String Locacion;
+	public String Locacion;
     
-    public long RUC;
+	public long RUC;
     
-    public String SitioWeb;
+	public String SitioWeb;
     
-    public String Descripcion;
+	public String Descripcion;
     
-    public String Correo;
+	public String Correo;
     
-    public String Contrasenia;
+	public String Contrasenia;
     
-    public EmpresaDto() {
+	public EmpresaDto() {
     	
     }
 
 	public String getNombreDeEmpresa() {
-		return NombreDeEmpresa;
+		return this.NombreDeEmpresa;
 	}
 
 	public void setNombreDeEmpresa(String nombreDeEmpresa) {
-		NombreDeEmpresa = nombreDeEmpresa;
+		this.NombreDeEmpresa = nombreDeEmpresa;
 	}
 
 	public String getLocacion() {
-		return Locacion;
+		return this.Locacion;
 	}
 
 	public void setLocacion(String locacion) {
-		Locacion = locacion;
+		this.Locacion = locacion;
 	}
 
 	public long getRUC() {
-		return RUC;
+		return this.RUC;
 	}
 
 	public void setRUC(long rUC) {
-		RUC = rUC;
+		this.RUC = rUC;
 	}
 
 	public String getSitioWeb() {
-		return SitioWeb;
+		return this.SitioWeb;
 	}
 
 	public void setSitioWeb(String sitioWeb) {
-		SitioWeb = sitioWeb;
+		this.SitioWeb = sitioWeb;
 	}
 
 	public String getDescripcion() {
-		return Descripcion;
+		return this.Descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
-		Descripcion = descripcion;
+		this.Descripcion = descripcion;
 	}
 
 	public String getCorreo() {
-		return Correo;
+		return this.Correo;
 	}
 
 	public void setCorreo(String correo) {
-		Correo = correo;
+		this.Correo = correo;
 	}
 
 	public String getContrasenia() {

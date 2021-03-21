@@ -2,14 +2,14 @@ package com.dorian.PortalWebBack.dto;
 
 public class Mensaje {
 
-	public String mensaje;
+	private String mensaje;
 
 	public Mensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
 
 	public String getMensaje() {
-		return mensaje;
+		return this.mensaje;
 	}
 
 	public void setMensaje(String mensaje) {
