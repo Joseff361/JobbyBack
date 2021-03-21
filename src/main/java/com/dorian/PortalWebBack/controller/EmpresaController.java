@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dorian.PortalWebBack.dto.EmpresaDto;
 import com.dorian.PortalWebBack.dto.Mensaje;
+import com.dorian.PortalWebBack.dto.UsuarioDto;
 import com.dorian.PortalWebBack.entity.Empresa;
 import com.dorian.PortalWebBack.entity.Usuario;
 import com.dorian.PortalWebBack.services.EmpresaService;
@@ -55,6 +56,28 @@ public class EmpresaController {
 		return new ResponseEntity<>(laEmpresa.get(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/empresaInfo")
+	public ResponseEntity<?> getEmpresaSegunUsuario(@RequestBody UsuarioDto usuariodto){
+		
+		if(usuariodto == null) {
+			return new ResponseEntity<>(new Mensaje("Empresa no encontrada en la BBDD"), HttpStatus.BAD_REQUEST);
+		}
+		
+		if(usuarioService.getUsuario(usuariodto.getId()).isEmpty()) {
+			return new ResponseEntity<>(new Mensaje("Empresa no encontrada en la BBDD"), HttpStatus.NOT_FOUND);
+		}
+		
+		Empresa laEmpresa = this.empresaService.getEmpresaPorUsuario(usuarioService.getUsuario(usuariodto.getId()).get());
+		
+		if(laEmpresa == null) {
+			
+			return new ResponseEntity<>(new Mensaje("Empresa no encontrada en la BBDD"), HttpStatus.NOT_FOUND);
+			
+		}
+		
+		return new ResponseEntity<>(laEmpresa,HttpStatus.OK);
+	}
+	
 	@PostMapping("/empresas")
 	public ResponseEntity<?> guardarEstudiante(@RequestBody EmpresaDto empresaDto){
 		
@@ -65,7 +88,7 @@ public class EmpresaController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
 		// GUARDADO EN AMBAS TABLAS
-		Usuario elUsuario = new Usuario(empresaDto.getCorreo(), passwordEncoder.encode(empresaDto.getContrasenia()));
+		Usuario elUsuario = new Usuario(empresaDto.getCorreo(), passwordEncoder.encode(empresaDto.getContrasenia()), "EMPRESA");
 		
 		Empresa laEmpresa = new Empresa(empresaDto.getNombreDeEmpresa(),
 										empresaDto.getLocacion(),

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dorian.PortalWebBack.dao.EmpresaRepository;
 import com.dorian.PortalWebBack.entity.Empresa;
+import com.dorian.PortalWebBack.entity.Usuario;
 
 @Service
 public class EmpresaService {
@@ -28,5 +29,10 @@ public class EmpresaService {
 	public void guardarEmpresa(Empresa laEmpresa) {
 		
 		this.empresaRepository.save(laEmpresa);
+	}
+	
+	public Empresa getEmpresaPorUsuario(Usuario elUsuario) {
+		
+		return this.empresaRepository.findByUsuario(elUsuario);
 	}
 }

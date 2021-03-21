@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dorian.PortalWebBack.dto.EstudianteDto;
 import com.dorian.PortalWebBack.dto.Mensaje;
+import com.dorian.PortalWebBack.dto.UsuarioDto;
 import com.dorian.PortalWebBack.entity.Estudiante;
 import com.dorian.PortalWebBack.entity.Usuario;
 import com.dorian.PortalWebBack.services.EstudianteService;
@@ -54,6 +55,24 @@ public class EstudianteController {
 		return new ResponseEntity<>(elEstudiante.get(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/estudianteInfo")
+	public ResponseEntity<?> getEmpresaSegunUsuario(@RequestBody UsuarioDto usuariodto){
+		
+		if(this.usuarioService.getUsuario(usuariodto.getId()).isEmpty() || usuariodto == null) {
+			return new ResponseEntity<>(new Mensaje("Estudiante no encontrado en la BBDD"), HttpStatus.NOT_FOUND);
+		}
+		
+		Estudiante elEstudiante = this.estudiantesService.getEstudiantePorUsuario(this.usuarioService.getUsuario(usuariodto.getId()).get());
+		
+		if(elEstudiante == null) {
+			
+			return new ResponseEntity<>(new Mensaje("Estudiante no encontrado en la BBDD"), HttpStatus.NOT_FOUND);
+			
+		}
+		
+		return new ResponseEntity<>(elEstudiante,HttpStatus.OK);
+	}
+	
 	@PostMapping("/estudiantes")
 	public ResponseEntity<?> guardarEstudiante(@RequestBody EstudianteDto estudianteDto){
 		
@@ -66,7 +85,7 @@ public class EstudianteController {
 		System.out.println(estudianteDto);
 		
 		// GUARDADO EN AMBAS TABLAS
-		Usuario elUsuario = new Usuario(estudianteDto.getCorreo(), passwordEncoder.encode(estudianteDto.getContrasenia()));
+		Usuario elUsuario = new Usuario(estudianteDto.getCorreo(), passwordEncoder.encode(estudianteDto.getContrasenia()), "ESTUDIANTE");
 		
 		Estudiante elEstudiante = new Estudiante(estudianteDto.getNombre(), estudianteDto.getApellido());
 		

@@ -15,14 +15,17 @@ public class Usuario {
 	private String correo;
 	
 	private String contrasenia;
+	
+	private String tipo;
 
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String correo, String contrasenia) {
+	public Usuario(String correo, String contrasenia, String tipo) {
 		this.correo = correo;
 		this.contrasenia = contrasenia;
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -49,9 +52,19 @@ public class Usuario {
 		this.contrasenia = contrasenia;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", correo=" + correo + ", contrasenia=" + contrasenia + "]";
+		return "Usuario [id=" + id + ", correo=" + correo + ", contrasenia=" + contrasenia + ", tipo=" + tipo + "]";
 	}
+
+	
 	
 }
