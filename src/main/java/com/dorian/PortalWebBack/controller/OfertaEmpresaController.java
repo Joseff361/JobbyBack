@@ -43,7 +43,7 @@ public class OfertaEmpresaController {
 		return new ResponseEntity<List<OfertaEmpresa>>(this.ofertaEmpresaService.obtenerTodasLasOfertas(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/ofertasEmpresa")
+	@PostMapping("/ofertasEmpresa")
 	public ResponseEntity<?> obtenerOfertasPorEmpresa(@RequestBody CredencialesDto credencialesDto){
 		
 		Optional<Empresa> empresa = empresaService.getEmpresaPorId(credencialesDto.getId());
