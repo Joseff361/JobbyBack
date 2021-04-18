@@ -1,13 +1,18 @@
 package com.dorian.PortalWebBack.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class OfertaEmpresa {
@@ -19,6 +24,10 @@ public class OfertaEmpresa {
 	@ManyToOne
     @JoinColumn(name="fk_empresa")
     private Empresa empresa;
+	
+	@ManyToMany(mappedBy = "ofertasEmpresa")
+    @JsonIgnoreProperties("ofertasEmpresa")
+	private List<Estudiante> estudiantes;
 	
 	private String descripcion;
 	
@@ -50,6 +59,19 @@ public class OfertaEmpresa {
 		this.area = area;
 	}
 
+	public void setEstudiante(Estudiante estudiante) {
+		if(this.estudiantes == null) {
+			this.estudiantes = new ArrayList();
+		}
+		
+		this.estudiantes.add(estudiante);
+	}
+	
+	
+	public List<Estudiante> getEstudiantes(){
+		return this.estudiantes;
+	}
+	
 	public int getId() {
 		return id;
 	}

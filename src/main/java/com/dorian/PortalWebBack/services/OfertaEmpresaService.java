@@ -1,6 +1,7 @@
 package com.dorian.PortalWebBack.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class OfertaEmpresaService {
 	public List<OfertaEmpresa> obtenerTodasLasOfertas(){
 		
 		return this.ofertaEmpresaRepository.findAll();
+	}
+	
+	public Optional<OfertaEmpresa> obtenerOfertaPorId(int id) {
+		return this.ofertaEmpresaRepository.findById(id);
 	}
 	
 	public List<OfertaEmpresa> obtenerSegunEmpresa(Empresa empresa){

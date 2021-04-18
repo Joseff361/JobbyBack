@@ -1,12 +1,20 @@
 package com.dorian.PortalWebBack.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Estudiante {
@@ -31,6 +39,14 @@ public class Estudiante {
 	@JoinColumn(name = "fk_suscripcion", referencedColumnName = "id")
 	public Suscripcion suscripcion;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "oferta_empresa_estudiante", 
+    joinColumns = @JoinColumn(name = "estudiante_id", referencedColumnName = "id"), 
+    inverseJoinColumns = @JoinColumn(name = "oferta_empresa_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties("estudiantes")
+	private List<OfertaEmpresa> ofertasEmpresa;
+	
+	
 	public Estudiante() {
 		
 	}
@@ -40,6 +56,18 @@ public class Estudiante {
 		this.apellido = apellido;
 	}
 
+	public void setOfertaEmpresa(OfertaEmpresa ofertaEmpresa) {
+		if(this.ofertasEmpresa == null) {
+			this.ofertasEmpresa = new ArrayList();
+		}
+		
+		this.ofertasEmpresa.add(ofertaEmpresa);
+	}
+	
+	public List<OfertaEmpresa> getOfertasEmpresa(){
+		return this.ofertasEmpresa;
+	}
+	
 	public int getId() {
 		return id;
 	}

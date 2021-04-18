@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dorian.PortalWebBack.dto.EstudianteDto;
 import com.dorian.PortalWebBack.dto.Mensaje;
 import com.dorian.PortalWebBack.dto.UsuarioDto;
+import com.dorian.PortalWebBack.entity.Curriculum;
 import com.dorian.PortalWebBack.entity.Estudiante;
 import com.dorian.PortalWebBack.entity.Usuario;
 import com.dorian.PortalWebBack.services.EstudianteService;
@@ -96,5 +97,29 @@ public class EstudianteController {
 		return new ResponseEntity<>(new Mensaje("Estudiante guardado en la BBDD"), HttpStatus.OK);
 	}
 	
-	
+	@PostMapping("/curriculum/{id}")
+	public ResponseEntity<?> actualizarCurriculum(@PathVariable int id, @RequestBody Curriculum elCurriculum){
+			
+		Optional<Estudiante> elEstudiante = this.estudiantesService.getEstudiantePorId(id);
+		
+		if(elEstudiante.isEmpty()) {
+			
+			return new ResponseEntity<>(new Mensaje("Estudiante no encontrado en la BBDD"), HttpStatus.NOT_FOUND);
+			
+		}
+		
+		Curriculum curriculum = new Curriculum(elCurriculum.getDireccion(),
+												 elCurriculum.getEmail(), 
+												 elCurriculum.getFormacion(),
+												 elCurriculum.getExperiencia(),
+												 elCurriculum.getHabilidades(),
+												 elCurriculum.getIdiomas());
+		
+		elEstudiante.get().setCurriculum(curriculum);
+		
+		this.estudiantesService.guardarEstudiante(elEstudiante.get());
+		
+		return new ResponseEntity<>(elEstudiante.get(), HttpStatus.OK);
+		
+	}
 }
