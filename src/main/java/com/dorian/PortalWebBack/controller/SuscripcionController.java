@@ -53,7 +53,7 @@ public class SuscripcionController {
 
 		
 		this.estudiantesService.guardarEstudiante(miEstudiante.get());
-		//this.ofertaEmpresaService.guardarOActualizarOferta(miOfertaEmpresa.get());
+		this.ofertaEmpresaService.guardarOActualizarOferta(miOfertaEmpresa.get());
 
 		return new ResponseEntity<>(new Mensaje("Postulacion registrada"), HttpStatus.OK);
 
